@@ -16,14 +16,6 @@ In the single-cycle implementation, each instruction executes in a single long c
 ### 2. 5-Stage Pipelined MIPS
 The pipelined processor overlaps instruction execution to target an ideal throughput of $\text{CPI} \approx 1$. The datapath is decoupled into 5 synchronous pipeline stages separated by pipeline registers (`IF/ID`, `ID/EX`, `EX/MEM`, `MEM/WB`).
 
-+---------------+     +---------------+     +---------------+     +---------------+     +---------------+
-|      IF       | --> |      ID       | --> |      EX       | --> |      MEM      | --> |      WB       |
-| Instruction   |     | Instruction   |     |   Execution   |     |  Data Memory  |     |   Write Back  |
-|     Fetch     |     | Decode / Reg  |     |   / Address   |     |     Access    |     | to Reg File   |
-+---------------+     +---------------+     +---------------+     +---------------+     +---------------+
-[PC, IM]             [RegFile]             [ALU, Fwd]            [DM, Branch]          [Mux to Reg]
-
-
 #### Pipeline Stages:
 1. **IF (Instruction Fetch):** Fetches the 32-bit instruction from Instruction Memory via the Program Counter ($PC$) and computes $PC + 4$.
 2. **ID (Instruction Decode & Register Fetch):** Decodes the opcode and function fields, asserts control signals, reads operands from the 32-entry Register File, and sign-extends the 16-bit immediate.
